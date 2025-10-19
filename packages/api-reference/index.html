@@ -18,12 +18,17 @@
 
     <!-- Initialize the Scalar API Reference -->
     <script type="module">
+      // Load the local galaxy spec
+      const galaxySpec = await fetch(
+        '/node_modules/@scalar/galaxy/dist/latest.json',
+      ).then((r) => r.json())
+
       Scalar.createApiReference('#app', {
         sources: [
           {
             title: 'Scalar Galaxy', // optional, would fallback to 'API #1'
             slug: 'scalar-galaxy', // optional, would be auto-generated from the title or the index
-            url: 'https://cdn.jsdelivr.net/npm/@scalar/galaxy/dist/latest.json',
+            content: galaxySpec,
           },
           {
             title: 'Swagger Petstore 2.0',
