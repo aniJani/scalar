@@ -47,7 +47,12 @@ const configProxy = computed({
 })
 
 const { toggleColorMode, isDarkMode } = useColorMode({
-  initialColorMode: configuration.darkMode ? 'dark' : undefined,
+  initialColorMode:
+    configuration.darkMode !== undefined
+      ? configuration.darkMode
+        ? 'dark'
+        : 'light'
+      : undefined,
   overrideColorMode: configuration.forceDarkModeState,
 })
 
@@ -57,6 +62,7 @@ watch(
     document.body.classList.toggle('dark-mode', Boolean(isDark))
     document.body.classList.toggle('light-mode', !isDark)
   },
+  { immediate: true },
 )
 </script>
 <template>
