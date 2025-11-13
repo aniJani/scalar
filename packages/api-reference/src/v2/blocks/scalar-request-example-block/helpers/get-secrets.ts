@@ -1,4 +1,5 @@
 import { isDefined } from '@scalar/helpers/array/is-defined'
+import { base64Encode } from '@scalar/helpers/string/base64'
 import type { SecuritySchemeObject } from '@scalar/workspace-store/schemas/v3.1/strict/security-scheme'
 
 /** Extract secrets from security schemes */
@@ -13,7 +14,7 @@ export const getSecrets = (securitySchemes: SecuritySchemeObject[]) =>
           scheme['x-scalar-secret-token'],
           scheme['x-scalar-secret-username'],
           scheme['x-scalar-secret-password'],
-          btoa(`${scheme['x-scalar-secret-username']}:${scheme['x-scalar-secret-password']}`),
+          base64Encode(`${scheme['x-scalar-secret-username']}:${scheme['x-scalar-secret-password']}`),
         ]
       }
       if (scheme.type === 'oauth2') {

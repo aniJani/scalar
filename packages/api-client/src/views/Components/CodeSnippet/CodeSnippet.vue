@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ScalarCodeBlock } from '@scalar/components'
+import { base64Encode } from '@scalar/helpers/string/base64'
 import type {
   Operation,
   RequestExample,

@@ -7,6 +7,7 @@ import {
 import { filterSecurityRequirements } from '@scalar/api-client/views/Request/RequestSection'
 import { ScalarCodeBlock } from '@scalar/components'
 import { freezeElement } from '@scalar/helpers/dom/freeze-element'
+import { base64Encode } from '@scalar/helpers/string/base64'
 import {
   createExampleFromRequest,
   requestSchema,
@@ -244,7 +245,7 @@ const secretCredentials = computed(() =>
       return [
         scheme.token,
         scheme.password,
-        btoa(`${scheme.username}:${scheme.password}`),
+        base64Encode(`${scheme.username}:${scheme.password}`),
       ]
     }
     if (scheme.type === 'oauth2') {

@@ -1,4 +1,5 @@
 import type { ErrorResponse } from '@/libs/errors'
+import { base64Encode } from '@scalar/helpers/string/base64'
 import type { Oauth2Flow, Server } from '@scalar/oas-utils/entities/spec'
 import { shouldUseProxy } from '@scalar/oas-utils/helpers'
 
@@ -282,7 +283,7 @@ export const authorizeServers = async (
 
     // Add client id + secret to headers
     if (flow.clientSecret) {
-      headers.Authorization = `Basic ${btoa(`${flow['x-scalar-client-id']}:${flow.clientSecret}`)}`
+      headers.Authorization = `Basic ${base64Encode(`${flow['x-scalar-client-id']}:${flow.clientSecret}`)}`
     }
 
     // Check if we should use the proxy

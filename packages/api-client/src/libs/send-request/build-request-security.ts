@@ -1,4 +1,5 @@
 import { replaceTemplateVariables } from '@/libs/string-template'
+import { base64Encode } from '@scalar/helpers/string/base64'
 import { cookieSchema, type Cookie } from '@scalar/oas-utils/entities/cookie'
 import type { SecurityScheme } from '@scalar/oas-utils/entities/spec'
 import { isDefined } from '@scalar/oas-utils/helpers'
@@ -46,7 +47,7 @@ export const buildRequestSecurity = (
         const password = replaceTemplateVariables(scheme.password, env)
         const value = `${username}:${password}`
 
-        headers['Authorization'] = `Basic ${value === ':' ? 'username:password' : btoa(value)}`
+        headers['Authorization'] = `Basic ${value === ':' ? 'username:password' : base64Encode(value)}`
       } else {
         const value = replaceTemplateVariables(scheme.token, env)
         headers['Authorization'] = `Bearer ${value || emptyTokenPlaceholder}`
